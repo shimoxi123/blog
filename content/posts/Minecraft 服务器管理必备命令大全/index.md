@@ -14,7 +14,7 @@ categories:
   - "服务器"
   - "我的世界"
 summary: "详细介绍 Minecraft 原版服务器的常用管理命令，包括玩家管理、世界控制、游戏规则设置等实用技巧，帮助服主轻松管理服务器。"
-featuredImagePreview: "/posts/image.svg"
+featured_image_preview: "/posts/image.svg"
 ---
 > [!TIP]
 > 本文整理了 Minecraft 原版服务器的所有常用命令，无需任何插件或 mod，适用于纯净服和整合包服务器。

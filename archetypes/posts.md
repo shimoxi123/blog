@@ -11,8 +11,8 @@ tags:
 categories:
   - 分类
 summary: "" # 文章摘要，默认为空
-featuredImagePreview: "" # 文章列表页预览图，默认为空
-featuredImage: "" # 文章详情页图片，默认为空
+featured_image_preview: "" # 文章列表页预览图，默认为空
+featured_image: "" # 文章详情页图片，默认为空
 
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
