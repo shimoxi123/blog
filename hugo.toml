@@ -580,7 +580,7 @@ external_icon = true
 # FixIt 0.3.0 | NEW public Git repository information only then enableGitInfo is true
 [params.git_info]
 # e.g. "https://github.com/hugo-fixit/docs"
-repo = "https://github.com/shimoxi123/blog-hexo"
+repo = "https://github.com/shimoxi123/blog"
 branch = "main"
 # the content directory path relative to the root of the repository
 dir = "content"
@@ -1672,7 +1672,7 @@ katex = false
 # FixIt 0.2.14 | NEW Giscus comments config
 [params.comment.giscus]
 enable = true
-repo = "shimoxi123/blog-hexo"
+repo = "shimoxi123/blog"
 repo_id = "R_kgDOPgqJrQ"
 category = "Announcements"
 category_id = "DIC_kwDOPgqJrc4C2-9O"
