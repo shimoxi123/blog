@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# 强制按字节序比较：脚本里用 LC_ALL=C 排序，但 comm/cmp 会跟随环境 locale，
+# 在 zh_CN.UTF-8 等非字节序 locale 下 comm 会因“输入未排序”直接报错退出。
+export LC_ALL=C
+
 # 参数说明：
 # 1: 上一次构建目录
 # 2: 当前构建目录

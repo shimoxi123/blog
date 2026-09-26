@@ -1,67 +1,76 @@
 name: Build Hugo Site
 
 on:
+  # 推送任意 tag 即构建部署（约定只在 main 上打 tag）
   push:
-    branches: ["main"]
+    tags: ["*"]
+  # 保留手动触发，方便在 Actions 页面随时重建（默认分支上存在本文件时才可用）
   workflow_dispatch:
 
+# build job 需要 push pages-dist 分支
 permissions:
   contents: write
 
+env:
+  # 让所有 action 都跑在 Node 24 运行时上
+  # （原本只挂在 Setup Hugo 一个 step 的 env 上，位置不对）
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
-  group: build-${{ github.ref }}
+  # 固定分组：不同 tag 相继推送时只保留最新的一次运行，
+  # 避免两次运行各自 force-push pages-dist 造成旧构建覆盖新构建
+  group: build-pages
   cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     env:
       SITE_URL: "https://www.san3.cn"
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0  # full history for enableGitInfo (Hugo lastmod)
           submodules: recursive
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: latest
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: latest
           extended: true
-        env:
-          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
-      - name: Setup Dart Sass
-        run: |
-          set -euo pipefail
-          DART_SASS_VERSION="1.102.0"
-          echo "Installing Dart Sass ${DART_SASS_VERSION}"
-          curl -sSL "https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz" -o /tmp/dart-sass.tar.gz
-          sudo tar -xzf /tmp/dart-sass.tar.gz -C /usr/local/lib
-          sudo ln -sf /usr/local/lib/dart-sass/sass /usr/local/bin/sass
-          sass --version
+      # Hugo 的图片处理结果与远程图片缓存。不缓存的话每次运行都要重新下载
+      # img.san3.cn 的远程图片并重处理 72 张图（本地实测冷构建 8.7s vs 热构建 0.5s）
+      - name: Restore Hugo cache
+        uses: actions/cache@v6
+        with:
+          path: |
+            resources/_gen
+            ~/.cache/hugo_cache
+          key: hugo-cache-${{ runner.os }}-${{ hashFiles('hugo.toml') }}
+          restore-keys: |
+            hugo-cache-${{ runner.os }}-
 
       - name: Build current site
         run: hugo --minify --destination public
 
-      - name: Build previous site (if exists)
+      # 上一版直接取上次部署出去的 pages-dist 内容
+      # （省掉一次完整 hugo 构建 + 一次主题 submodule 克隆）
+      - name: Fetch previous site (deployed)
         shell: bash
         run: |
           set -euo pipefail
-          if git rev-parse HEAD^ >/dev/null 2>&1; then
-            PREV_SHA="$(git rev-parse HEAD^)"
-            git worktree add /tmp/prev-site "${PREV_SHA}"
-            git -C /tmp/prev-site submodule update --init --recursive
-            hugo --minify --source /tmp/prev-site --destination /tmp/public-prev
+          mkdir -p /tmp/public-prev
+          if git fetch --no-tags origin pages-dist; then
+            git archive FETCH_HEAD | tar -x -C /tmp/public-prev
+            # 上一版部署时塞进去的变更清单不参与本次 diff
+            rm -f /tmp/public-prev/_changed-urls.txt
+            echo "已取到 pages-dist 作为上一版基线"
           else
-            mkdir -p /tmp/public-prev
+            echo "::notice::远程没有 pages-dist 分支（首次部署），上一版视为空"
           fi
 
       - name: Generate changed URL list
@@ -69,13 +78,6 @@ jobs:
 
       - name: Expose changed list on site
         run: cp changed-urls.txt public/_changed-urls.txt
-
-      - name: Upload changed list artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: changed-urls
-          path: changed-urls.txt
-          if-no-files-found: error
 
       - name: Deploy to pages-dist branch
         shell: bash
