@@ -18,11 +18,16 @@
 
 - nickname: "二叉树树"
   avatar: https://q2.qlogo.cn/headimg_dl?dst_uin=2726730791&spec=0
-  url: https://2x.nz/
+  url: https://www.acofork.com/
 
 - nickname: "volantis社区"
   avatar: https://img.san3.cn/img/voicon_2025101817_df89713b8dfe29eb.webp
   url: https://volantis.js.org/v6/getting-started/
+
+- nickname: FixIt
+  avatar: https://fixit.lruihao.cn/images/hugo-fixit.webp
+  url: https://fixit.lruihao.cn
+  description: FixIt Theme Official Documentation
 
 - nickname: "sutao的个人博客"
   avatar: /images/friends/sutao.svg
@@ -41,4 +46,4 @@
 - nickname: "石墨烯积木"
   avatar: https://img.san3.cn/logo.webp
   url: https://www.san3.cn
-  description: "石墨烯积木的个人博客，分享 STM32、Linux、编程开发、Minecraft 等技术内容"
+  description: "石墨烯积木的个人博客，分享一些有趣的内容"
