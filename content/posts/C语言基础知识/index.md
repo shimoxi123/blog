@@ -14,9 +14,9 @@ categories:
   - "编程语言"
 summary: "C语言入门基础知识，包含语法、数据类型、控制结构等核心概念"
 featured_image_preview: "https://img.san3.cn/img/fa46a0757f3ce26e.webp"
+images:
+  - "https://img.san3.cn/img/fa46a0757f3ce26e.webp"
 ---
-# C语言基础知识
-
 C语言是一门通用的、过程化的计算机程序设计语言，由丹尼斯·里奇在1972年为了重写UNIX操作系统而开发。C语言具有高效、灵活、功能丰富、表达力强和较高的移植性等特点。
 
 ## 1. 基本语法结构

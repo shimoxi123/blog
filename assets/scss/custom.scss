@@ -55,3 +55,26 @@
     grid-template-columns: 1fr;
   }
 }
+
+// ===== 友链页：麻将牌卡片底色跟随主题背景色 =====
+// 覆盖 themes/FixIt/assets/scss/pages/friends/_index.scss 中的 $mahjong-bg / $mahjong-bg-hover
+.special.friends .friend-links[data-scheme="mahjong"] > .friend-link {
+  background: var(--fi-global-background-color);
+
+  // 悬停仅保留主题的上浮 + 硬阴影反馈，底色与常态一致，避免回弹成象牙渐变
+  &:hover {
+    background: var(--fi-global-background-color);
+  }
+}
+
+// ===== Markdown 语法示例表：示例标题不参与文档大纲 =====
+.md-heading-demo {
+  font-weight: 600;
+}
+
+.md-heading-demo[data-level="1"] { font-size: 1.75em; }
+.md-heading-demo[data-level="2"] { font-size: 1.5em; }
+.md-heading-demo[data-level="3"] { font-size: 1.25em; }
+.md-heading-demo[data-level="4"] { font-size: 1.1em; }
+.md-heading-demo[data-level="5"] { font-size: 1em; }
+.md-heading-demo[data-level="6"] { font-size: 0.9em; }

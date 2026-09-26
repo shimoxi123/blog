@@ -7,6 +7,13 @@ description: "石墨烯积木的友情链接"
 keywords:
   - 友情链接
 comment: true
+
+friend_scheme: mahjong
+friend_sort: weight
+friend_link_check: false
+link:
+guard:
+    enable: false
 ---
 
 <!-- data/friends.yml 中的友链数据会自动加载到此处 -->

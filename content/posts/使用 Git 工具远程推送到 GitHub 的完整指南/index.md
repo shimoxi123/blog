@@ -1,6 +1,7 @@
 ---
 title: "使用 Git 工具远程推送到 GitHub 的完整指南"
 date: 2025-07-12T23:00:00+08:00
+description: "在现代前端或博客项目中，我们常使用 Git 版本控制工具来管理代码，并将仓库托管在 GitHub 上，实现多人协作和自动部署。本文将以 Hexo 博客项目为例，介绍如何使用 Git 命令将本地项目远程推送到 GitHub，并解决常见的冲突与权限问题。"
 url: "/2025/07/12/23"
 draft: false
 comment: true

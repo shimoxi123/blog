@@ -27,3 +27,6 @@ ehthumbs.db
 node_modules/
 AGENTS.md
 .mimocode/
+
+# skills
+.agents/
