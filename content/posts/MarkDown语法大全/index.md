@@ -1,6 +1,7 @@
 ---
 title: "MarkDown语法大全"
 date: 2025-07-14T18:00:00+08:00
+description: "Markdown是一种轻量级的标记语言，广泛用于编写文档、博客和README文件。本文将介绍Markdown的基本语法和常用格式，帮助你快速上手使用Markdown进行文本编辑。"
 url: "/2025/07/14/18"
 draft: false
 comment: true
@@ -10,6 +11,8 @@ tags:
 categories:
   - "语法"
 featured_image_preview: "https://img.san3.cn/img/5d34bd857ca77716.webp"
+images:
+  - "https://img.san3.cn/img/5d34bd857ca77716.webp"
 summary: "Markdown是一种轻量级的标记语言，广泛用于编写文档、博客和README文件。本文将介绍Markdown的基本语法和常用格式，帮助你快速上手使用Markdown进行文本编辑。"
 ---
 <!-- more -->
@@ -17,12 +20,12 @@ summary: "Markdown是一种轻量级的标记语言，广泛用于编写文档�
 
 | 序号 | 说明         | Markdown                    | 预览效果              |
 |------|--------------|-----------------------------|-----------------------|
-| 1    | 一级标题     | `# 一级标题`                | <h1>一级标题</h1>     |
-| 2    | 二级标题     | `## 二级标题`               | <h2>二级标题</h2>     |
-| 3    | 三级标题     | `### 三级标题`              | <h3>三级标题</h3>     |
-| 4    | 四级标题     | `#### 四级标题`             | <h4>四级标题</h4>     |
-| 5    | 五级标题     | `##### 五级标题`            | <h5>五级标题</h5>     |
-| 6    | 六级标题     | `###### 六级标题`           | <h6>六级标题</h6>     |
+| 1    | 一级标题     | `# 一级标题`                | <span class="md-heading-demo" data-level="1">一级标题</span>     |
+| 2    | 二级标题     | `## 二级标题`               | <span class="md-heading-demo" data-level="2">二级标题</span>     |
+| 3    | 三级标题     | `### 三级标题`              | <span class="md-heading-demo" data-level="3">三级标题</span>     |
+| 4    | 四级标题     | `#### 四级标题`             | <span class="md-heading-demo" data-level="4">四级标题</span>     |
+| 5    | 五级标题     | `##### 五级标题`            | <span class="md-heading-demo" data-level="5">五级标题</span>     |
+| 6    | 六级标题     | `###### 六级标题`           | <span class="md-heading-demo" data-level="6">六级标题</span>     |
 | 7    | 文本链接     | `[文本](https://example.com)` | [示例链接](https://example.com)            |
 | 8    | 直接链接     | `<https://example.com>`     | <https://example.com> |
 | 9    | 加粗文本     | `**加粗**`                  | **加粗**              |

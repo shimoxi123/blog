@@ -66,3 +66,15 @@
     background: var(--fi-global-background-color);
   }
 }
+
+// ===== Markdown 语法示例表：示例标题不参与文档大纲 =====
+.md-heading-demo {
+  font-weight: 600;
+}
+
+.md-heading-demo[data-level="1"] { font-size: 1.75em; }
+.md-heading-demo[data-level="2"] { font-size: 1.5em; }
+.md-heading-demo[data-level="3"] { font-size: 1.25em; }
+.md-heading-demo[data-level="4"] { font-size: 1.1em; }
+.md-heading-demo[data-level="5"] { font-size: 1em; }
+.md-heading-demo[data-level="6"] { font-size: 0.9em; }
