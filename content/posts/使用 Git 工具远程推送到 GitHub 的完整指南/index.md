@@ -12,8 +12,13 @@ tags:
   - "GitHub"
 categories:
   - "教程"
-summary: "在现代前端或博客项目中，我们常使用 Git 版本控制工具来管理代码，并将仓库托管在 GitHub 上，实现多人协作和自动部署。本文将以 Hexo 博客项目为例，介绍如何使用 Git 命令将本地项目远程推送到 GitHub，并解决常见的冲突与权限问题。(此文章由AI辅助生成，仅供参考)"
+summary: "在现代前端或博客项目中，我们常使用 Git 版本控制工具来管理代码，并将仓库托管在 GitHub 上，实现多人协作和自动部署。本文将以 Hexo 博客项目为例，介绍如何使用 Git 命令将本地项目远程推送到 GitHub，并解决常见的冲突与权限问题。"
 featured_image_preview: "/posts/image.svg"
+params:
+  disclaimer:
+    content: ''
+    enable: true
+    type: ai
 ---
 
 <!-- more -->

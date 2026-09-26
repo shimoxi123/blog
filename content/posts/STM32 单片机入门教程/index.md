@@ -13,7 +13,12 @@ tags:
 categories:
   - "教程"
 featured_image_preview: "https://img.san3.cn/img/150f6be36156660d.webp"
-summary: "STM32 是意法半导体（ST）推出的一系列基于 ARM Cortex-M 内核的高性能、低功耗 32 位单片机，被广泛应用于嵌入式系统开发。本教程将带你从零开始了解 STM32，适合电子类专业学生和电子工程师入门学习。(此文章由AI辅助生成，仅供参考)"
+summary: "STM32 是意法半导体（ST）推出的一系列基于 ARM Cortex-M 内核的高性能、低功耗 32 位单片机，被广泛应用于嵌入式系统开发。本教程将带你从零开始了解 STM32，适合电子类专业学生和电子工程师入门学习。"
+params:
+  disclaimer:
+    content: ''
+    enable: true
+    type: ai
 ---
 
 <!-- more -->

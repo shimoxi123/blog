@@ -517,6 +517,10 @@ enable_translation_merge = false
 # You can turn it off, but we would really appreciate if you don't, as this is a good way to watch FixIt's popularity on the rise.
 disable_theme_inject = false
 
+
+[params.robots]
+allow_crawlers = true
+
 # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Page-level params (migrated from [params.page] in FixIt v1.0)
 # All params and sections below can be used in page front matter to override per-page.
@@ -533,7 +537,7 @@ hidden_from_related = false
 # FixIt 0.3.10 | NEW whether to hide a page from RSS, Atom and JSON feed
 hidden_from_feed = false
 # whether to enable twemoji
-twemoji = false
+twemoji = true
 # FixIt 0.2.18 | CHANGED whether to enable lightgallery
 # set to true, images in the content will be shown as the gallery if the image has a title, e.g. ![alt](src "title")
 # set to "force", images in the content will be forced to shown as the gallery regardless of the image has a title or not, e.g. ![alt](src)
@@ -547,10 +551,10 @@ fontawesome = true
 # license info (HTML format is supported)
 license = '<a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>'
 # FixIt 0.3.10 | CHANGED Page style ["narrow", "normal", "wide", ...]
-page_style = "normal"
+page_style = "wide"
 # FixIt 0.2.17 | CHANGED Auto Bookmark Support
 # If true, save the reading progress when closing the page.
-auto_bookmark = false
+auto_bookmark = true
 # FixIt 0.4.0 | NEW whether to show the last modified time
 show_lastmod = true
 # FixIt 0.2.17 | NEW whether to enable word count
@@ -562,7 +566,7 @@ end_flag = ""
 # FixIt 0.2.18 | NEW whether to enable instant.page
 instant_page = true
 # FixIt 0.3.0 | NEW whether to enable collection list at the sidebar
-collection_list = false
+collection_list = true
 # FixIt 0.3.0 | NEW whether to enable collection navigation at the end of the post
 collection_navigation = false
 
@@ -1243,7 +1247,7 @@ user_id = ""
 # Combined with Hugo's image processing option `imaging` for image optimisation
 [params.image]
 # cache remote images for better optimisations
-cache_remote = false
+cache_remote = true
 # Image resizing and optimisation (may slow builds)
 optimise = true
 # FixIt 0.4.0 | NEW A list of image file names or patterns to exclude from optimisation
@@ -1262,6 +1266,7 @@ wrapper = true
 # available modes: ["classic", "mac", "simple", ...]
 # if you set to custom value, you need to create a custom CSS for data-mode attribute
 mode = "classic"
+downloadable = true
 # additional classes for the code block wrapper
 # e.g. "is-collapsed is-expanded line-nos-hidden line-wrapping"
 wrapper_class = ""
