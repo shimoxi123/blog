@@ -11,8 +11,8 @@ tags:
 categories:
   - 分类
 summary: "文章摘要"
-featuredImagePreview: "/image.png"
-featuredImage: "/image.png"
+featured_image_preview: "/image.png"
+featured_image: "/image.png"
 
 
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter

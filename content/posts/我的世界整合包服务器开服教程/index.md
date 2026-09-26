@@ -13,7 +13,7 @@ categories:
   - "服务器"
   - "我的世界"
 summary: "本文介绍了如何使用免费的云服务器来搭建我的世界整合包服务器，并提供了详细的配置步骤和注意事项。"
-featuredImagePreview: "https://img.san3.cn/img/MCV_SummerDrop_Hero_DotNet_Homepage_1920x1080.webp"
+featured_image_preview: "https://img.san3.cn/img/MCV_SummerDrop_Hero_DotNet_Homepage_1920x1080.webp"
 ---
 ## 需要准备的东西
 - 一台免费的云服务器（可以参考我的<a href="https://www.san3.cn/2025/08/07/19/" title="点击查看">上一篇博客</a>来获取一个免费的云服务器）

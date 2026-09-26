@@ -55,3 +55,14 @@
     grid-template-columns: 1fr;
   }
 }
+
+// ===== 友链页：麻将牌卡片底色跟随主题背景色 =====
+// 覆盖 themes/FixIt/assets/scss/pages/friends/_index.scss 中的 $mahjong-bg / $mahjong-bg-hover
+.special.friends .friend-links[data-scheme="mahjong"] > .friend-link {
+  background: var(--fi-global-background-color);
+
+  // 悬停仅保留主题的上浮 + 硬阴影反馈，底色与常态一致，避免回弹成象牙渐变
+  &:hover {
+    background: var(--fi-global-background-color);
+  }
+}

@@ -14,7 +14,7 @@ categories:
   - "嵌入式开发"
   - "教程"
 summary: "本文介绍了如何在archLinux上使用CLion开发stm32，包括安装CLion、安装stm32cubeclt和stm32cubemx，以及新建工程的详细步骤。"
-featuredImagePreview: "https://img.san3.cn/img/1b305c16104e6738.webp"
+featured_image_preview: "https://img.san3.cn/img/1b305c16104e6738.webp"
 ---
 ## 1.0 安装CLion
 

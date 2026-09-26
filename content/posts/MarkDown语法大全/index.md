@@ -9,7 +9,7 @@ tags:
   - "markdown"
 categories:
   - "语法"
-featuredImagePreview: "https://img.san3.cn/img/5d34bd857ca77716.webp"
+featured_image_preview: "https://img.san3.cn/img/5d34bd857ca77716.webp"
 summary: "Markdown是一种轻量级的标记语言，广泛用于编写文档、博客和README文件。本文将介绍Markdown的基本语法和常用格式，帮助你快速上手使用Markdown进行文本编辑。"
 ---
 <!-- more -->

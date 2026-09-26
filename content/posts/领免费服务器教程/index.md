@@ -14,7 +14,7 @@ categories:
   - "服务器"
   - "白嫖"
 summary: "本文介绍了如何申请和使用免费的云服务器，并提供了详细的配置步骤和注意事项。"
-featuredImagePreview: "https://img.san3.cn/img/988e8ce36cdd8570.webp"
+featured_image_preview: "https://img.san3.cn/img/988e8ce36cdd8570.webp"
 ---
 
 ## 前言

@@ -13,7 +13,7 @@ tags:
 categories:
   - "编程语言"
 summary: "C语言入门基础知识，包含语法、数据类型、控制结构等核心概念"
-featuredImagePreview: "https://img.san3.cn/img/fa46a0757f3ce26e.webp"
+featured_image_preview: "https://img.san3.cn/img/fa46a0757f3ce26e.webp"
 ---
 # C语言基础知识
 
