@@ -4,16 +4,13 @@ subtitle: 朋友们的博客
 layout: friends
 date: 2026-02-24
 description: "石墨烯积木的友情链接"
-keywords:
-  - 友情链接
+keywords: '友情链接,博客友链,个人博客,交换友链'
 comment: true
 
 friend_scheme: mahjong
 friend_sort: weight
+# 关闭主题的构建期死链检测：它用 Go UA + 3 秒超时，会把正常站点误判为失效（实测 blog.yujiay.wang）
 friend_link_check: false
-link:
-guard:
-    enable: false
 ---
 
 <!-- data/friends.yml 中的友链数据会自动加载到此处 -->

@@ -1,7 +1,7 @@
 # 友链数据
 #
 # 如何申请友链：
-# 1. Fork 本仓库：https://github.com/shimoxi123/blog-hexo
+# 1. Fork 本仓库：https://github.com/shimoxi123/blog
 # 2. 在下方添加你的网站信息
 # 3. 提交 Pull Request
 #
@@ -10,6 +10,7 @@
 #   avatar: 朋友头像
 #   url: 站点链接
 #   description: 对朋友或其站点的说明
+#   weight: 0            # 可选，数值越大越靠前（friend_sort: weight 时生效）
 
 - nickname: "Aliom个人博客"
   avatar: /images/friends/Aliom.svg
@@ -28,10 +29,6 @@
   avatar: https://fixit.lruihao.cn/images/hugo-fixit.webp
   url: https://fixit.lruihao.cn
   description: FixIt Theme Official Documentation
-
-- nickname: "sutao的个人博客"
-  avatar: /images/friends/sutao.svg
-  url: https://www.stacktao.cn/
 
 - nickname: "Fgaoxing"
   avatar: https://img.yt-blog.top/webp/logo.webp

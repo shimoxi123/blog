@@ -1,0 +1,146 @@
+{{- /*
+  友链页模板（站点级覆盖 themes/FixIt/layouts/friends.html）
+
+  为什么需要覆盖（基于主题 v1.0.0 / 1a7129ee 版本复制修改）：
+    1. 头像优化：主题调用 plugin/image.html 时没传 OptimConfig/Sizes/Loading，
+       导致远程头像按原图尺寸下载（实测有 1080×1080 的 JPG 只显示 100px），
+       且没有 srcset 与懒加载。此处传 100w/200w webp srcset + sizes + lazy。
+    2. 友链 dofollow：plugin/link.html 对外链硬编码 rel="external nofollow"，
+       而友链通常希望 dofollow（对等交换才有意义）。此处直接渲染 <a>，
+       rel 用 "external noopener noreferrer"（保留安全属性，去掉 nofollow）。
+
+  其余逻辑（三种 scheme、排序、坏链检测、guard 跳转）与主题一致。
+  主题升级后请比对 themes/FixIt/layouts/friends.html 再决定是否同步。
+*/ -}}
+
+{{- define "title" -}}
+  {{- cond (.Param "capitalize_titles") (title .Title) .Title -}}
+  {{- if .Site.Params.with_site_title }} {{ .Site.Params.title_delimiter }} {{ .Site.Title }}{{- end -}}
+{{- end -}}
+
+{{- define "content" -}}
+  {{- $isGuarded := .Params.link.guard.enable | default false -}}
+  {{- $scheme := .Params.friend_scheme | default "mahjong" -}}
+  {{- $sortField := .Params.friend_sort | default "weight" -}}
+  {{- $linkCheck := .Params.friend_link_check | default false -}}
+
+  {{- /* 头像 srcset：按卡片实际显示尺寸（约 100px）生成小图，避免下载原图 */ -}}
+  {{- $avatarOptim := slice
+    (dict "Process" "resize 100x webp q80" "descriptor" "100w")
+    (dict "Process" "resize 200x webp q80" "descriptor" "200w")
+  -}}
+
+  {{- /* Load and sort friends data: friends.<lang>.yml > friends.yml */ -}}
+  {{- $friends := index hugo.Data (printf "friends.%v" .Language) | default hugo.Data.friends | default slice -}}
+  {{- if $friends -}}
+    {{- if eq $sortField "nickname" -}}
+      {{- $sorted := slice -}}
+      {{- range $friends -}}
+        {{- $key := printf "%05d_%s" (sub 99999 (.weight | default 0 | int)) .nickname -}}
+        {{- $sorted = $sorted | append (merge . (dict "sortKey" $key)) -}}
+      {{- end -}}
+      {{- $friends = sort $sorted "sortKey" -}}
+    {{- else -}}
+      {{- $friends = sort $friends "weight" "desc" -}}
+    {{- end -}}
+  {{- end -}}
+
+  <article class="page single special friends">
+    <div class="page-header">
+      <h1 class="single-title animate__animated animate__pulse animate__faster">{{- cond (.Param "capitalize_titles") (title .Title) .Title -}}</h1>
+      {{- with .Params.subtitle -}}<p class="single-subtitle animate__animated animate__fadeIn">{{ . | $.RenderString }}</p>{{- end -}}
+    </div>
+
+    {{- if $friends -}}
+    <div class="friend-links" data-scheme="{{ $scheme }}">
+      {{- range $friend := $friends -}}
+        {{- /* Avatar */ -}}
+        {{- $avatar := "" -}}
+        {{- if $friend.avatar -}}
+          {{- $avatar = dict
+            "Src" $friend.avatar
+            "Alt" $friend.nickname
+            "Title" $friend.description
+            "Class" "friend-avatar"
+            "OptimConfig" $avatarOptim
+            "Sizes" "100px"
+            "Loading" "lazy"
+            | partial "plugin/image.html" -}}
+        {{- else -}}
+          {{- $avatar = `<svg class="friend-avatar" aria-hidden="true" viewBox="0 0 100 100" fill="currentColor"><rect width="100" height="100" rx="8" fill="currentColor" opacity="0.08"/><circle cx="50" cy="50" r="32" stroke="currentColor" stroke-width="3" fill="none" opacity="0.25"/><circle cx="38" cy="42" r="3" opacity="0.5"/><circle cx="62" cy="42" r="3" opacity="0.5"/><path d="M36 58c4 6 24 6 28 0" stroke="currentColor" stroke-width="3" fill="none" opacity="0.4" stroke-linecap="round"/></svg>` -}}
+        {{- end -}}
+
+        {{- /* Nickname */ -}}
+        {{- $nickname := printf `<span class="friend-nickname" title="%s">%s</span>` $friend.nickname $friend.nickname -}}
+
+        {{- /* Description */ -}}
+        {{- $description := "" -}}
+        {{- with $friend.description -}}
+          {{- if ne $scheme "mahjong" -}}
+            {{- $description = printf `<p class="friend-description">%s</p>` . -}}
+          {{- end -}}
+        {{- end -}}
+
+        {{- /* Card content by scheme */ -}}
+        {{- $content := "" -}}
+        {{- if eq $scheme "domino" -}}
+          {{- $content = printf `%s<span class="friend-info">%s%s</span>` $avatar $nickname $description -}}
+        {{- else if eq $scheme "note" -}}
+          {{- $content = printf `%s%s` $nickname $description -}}
+        {{- else -}}
+          {{- $content = printf `%s%s` $avatar $nickname -}}
+        {{- end -}}
+
+        {{- /* Dead link detection (dev mode only) */ -}}
+        {{- $isBroken := false -}}
+        {{- $linkStatus := "ok" -}}
+        {{- with $friend.url -}}
+          {{- if and hugo.IsDevelopment $linkCheck -}}
+            {{- $linkStatus = partial "function/check-link.html" (dict "url" .) -}}
+          {{- end -}}
+        {{- end -}}
+        {{- $isBroken = eq $linkStatus "broken" -}}
+
+        {{- /* CSS classes + broken label */ -}}
+        {{- $class := "friend-link" -}}
+        {{- $attr := "" -}}
+        {{- with $friend.url -}}
+          {{- if $isBroken -}}
+            {{- $class = printf "%s friend-link--broken" $class -}}
+            {{- $attr = printf ` data-expired-label="%s"` (T "friends.expired") -}}
+          {{- end -}}
+
+          {{- /* Render link: 与 plugin/link.html 一致，但外链 rel 不含 nofollow */ -}}
+          {{- $url := urls.Parse . -}}
+          {{- $isExternal := and $url.IsAbs (not (in (slice "javascript" "mailto" "tel" "file" "data" "vscode" "trae") $url.Scheme)) (not (strings.HasPrefix . site.BaseURL)) -}}
+          {{- $destination := cond $isGuarded (add (relLangURL "link") "?target=" (urlquery .)) . -}}
+          {{- $attrs := printf `href="%s"` ($destination | safeURL) -}}
+          {{- with $friend.description -}}
+            {{- $attrs = printf ` title="%s"` . | add $attrs -}}
+          {{- end -}}
+          {{- if $isExternal -}}
+            {{- $attrs = add $attrs ` target="_blank" rel="external noopener noreferrer"` -}}
+          {{- end -}}
+          {{- $attrs = printf ` class="%s"` $class | add $attrs -}}
+          {{- if and $isGuarded (.Site.Params.link.guard.mode) (eq .Site.Params.link.guard.mode "modal") -}}
+            {{- $attrs = add $attrs ` data-guard="modal"` -}}
+          {{- end -}}
+          {{- $attrs = add $attrs $attr -}}
+          <a {{ $attrs | safeHTMLAttr }}>{{ $content | safeHTML }}</a>
+        {{- else -}}
+          <span class="friend-link">{{ $content | safeHTML }}</span>
+        {{- end -}}
+      {{- end -}}
+    </div>
+    {{- end -}}
+
+    {{- /* Content */ -}}
+    <div class="content" id="content">
+      {{- dict "Content" .Content "Ruby" (.Param "ruby") "Fraction" (.Param "fraction") "Fontawesome" (.Param "fontawesome") | partial "function/content.html" | safeHTML -}}
+    </div>
+  </article>
+{{- end -}}
+
+{{- define "comments" -}}
+  {{- partial "base/comment.html" . -}}
+{{- end -}}
