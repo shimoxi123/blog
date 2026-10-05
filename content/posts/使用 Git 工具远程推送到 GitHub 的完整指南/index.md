@@ -2,6 +2,7 @@
 title: "使用 Git 工具远程推送到 GitHub 的完整指南"
 date: 2025-07-12T23:00:00+08:00
 description: "在现代前端或博客项目中，我们常使用 Git 版本控制工具来管理代码，并将仓库托管在 GitHub 上，实现多人协作和自动部署。本文将以 Hexo 博客项目为例，介绍如何使用 Git 命令将本地项目远程推送到 GitHub，并解决常见的冲突与权限问题。"
+keywords: 'Git,GitHub,远程仓库,SSH免密,合并冲突,Hexo部署,自动部署'
 url: "/2025/07/12/23"
 draft: false
 comment: true
@@ -23,11 +24,16 @@ params:
 ---
 
 <!-- more -->
+
+## 一、前言
+
+本文以 Hexo 博客项目为例，带你走完「本地仓库 → 关联 GitHub 远程仓库 → 提交推送」的完整流程，并覆盖日常更新、合并冲突处理、SSH Key 免密配置，以及推送后触发自动部署这几个环节。全程只需要 Git 命令，不需要额外的图形化工具。
+
 ---
 
 ## 二、准备工作
 
-1. 申请并登录 [GitHub](www.github.com) 账号
+1. 申请并登录 [GitHub](https://github.com) 账号
 2. 在 GitHub 上新建一个空仓库，例如 `GeRenBoKe`，默认分支设为 `main`。
 3. 在本地安装 Git：([Git中文官网](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git))
    ```bash
@@ -85,6 +91,10 @@ origin  https://github.com/shimoxi123/GeRenBoKe.git (push)
 
 > [!NOTE]
 > 第一次推送时需要加 `-u`，可以在后续直接使用 `git push`。
+>
+> 如果用 HTTPS 地址推送，GitHub 自 2021 年 8 月起已不再支持账号密码验证，密码处需要填写
+> **Personal Access Token**（GitHub → Settings → Developer settings → Personal access tokens），
+> 否则会提示 `Authentication failed`。想彻底免去每次输入凭据，可直接看第六节的 SSH Key 配置。
 
 ---
 
