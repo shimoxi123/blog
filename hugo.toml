@@ -656,7 +656,9 @@ find_all_matches = false
 location = 0
 threshold = 0.3
 distance = 100
-ignore_location = false
+# 必须在正文任意位置都能命中（false 时超过 distance=100 字符的匹配会被丢弃，
+# 导致正文中后段的关键词如"隧道""cloudflare"完全搜不到）
+ignore_location = true
 use_extended_search = false
 ignore_field_norm = false
 
@@ -1276,6 +1278,8 @@ wrapper = true
 # if you set to custom value, you need to create a custom CSS for data-mode attribute
 mode = "classic"
 downloadable = true
+# [classic] whether to enable code fullscreen button in the code block header
+fullscreen = false
 # additional classes for the code block wrapper
 # e.g. "is-collapsed is-expanded line-nos-hidden line-wrapping"
 wrapper_class = ""
@@ -1284,9 +1288,11 @@ max_shown_lines = 10
 # whether to enable code copy button
 copyable = true
 # [classic] whether to enable line numbers toggle button in the code block header
-line_nos_toggler = true
+# 行号切换按钮（关闭后行号仍由 markup.highlight.lineNos 控制）
+line_nos_toggler = false
 # [classic] whether to enable toggle line wrapping button in the code block header
-line_wrap_toggler = true
+# 自动换行切换按钮
+line_wrap_toggler = false
 # [classic][Experimental] whether to enable code edit button in the code block header
 editable = false
 
@@ -1701,6 +1707,20 @@ lang = "zh-CN"
 light_theme = "light"
 dark_theme = "dark"
 lazy_load = true
+
+# 外观变量（[params.appearance]）
+# 说明：主题在 function/scss-vars.html 里已给出很好的中文默认值，未设置即为默认：
+#   字体 = system-ui, -apple-system, ..., PingFang SC, Microsoft YaHei UI, ...
+#   字号 = 16px   全局圆角 = 6px   链接色 = #161209 / dark #b3bdcb
+# 所以这里只覆盖需要调整的项，其余保持默认。
+[params.appearance]
+# 与 assets/scss/custom.scss 中卡片/图片的 0.5rem 圆角保持一致
+global_border_radius = "8px"
+# 需要换字体/字号/主色时取消注释（颜色只支持 hex 或 rgba(...)）
+# global_font_family = "'Noto Sans SC', 'PingFang SC', system-ui, sans-serif"
+# global_font_size = "16px"
+# global_link_color = "#1a73e8"
+# global_link_color_dark = "#6cb6ff"
 
 # Third-party library config
 [params.library]

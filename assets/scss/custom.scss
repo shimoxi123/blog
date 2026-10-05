@@ -67,6 +67,35 @@
   }
 }
 
+// ===== 正文图片：边缘阴影 =====
+// 覆盖正文里各类图片：带 caption 的 figure、lightgallery 包裹的图片（默认开启），
+// 以及 lightgallery 关闭时直接落在段落里的裸图片。
+// 发丝描边复用主题边框色，保证浅色/深色模式下边缘都清晰可辨。
+#content {
+  figure img,
+  a.lightgallery img,
+  > p > img {
+    border-radius: 0.5rem;
+    box-shadow:
+      0 0 0 1px var(--fi-global-border-color),
+      0 4px 16px light-dark(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.55));
+  }
+}
+
+// ===== 用 image 短代码按百分比缩小的图片：按原始比例缩放 =====
+// 主题会给带 width 的图片一并输出原始 height 属性，两者同时生效会拉伸图片，
+// 这里显式 height: auto 让高度跟随宽度（仅影响显式写了百分比宽度的图片）。
+#content img[width$="%"] {
+  height: auto;
+}
+
+// ===== 关闭 Mermaid「代码」标签页的全屏按钮 =====
+// 普通代码块由 [params.codeblock] fullscreen = false 关闭；
+// Mermaid 包裹层由主题硬编码 fullscreen=true（plugin/mermaid.html），无配置项，只能在此隐藏。
+#content .code-block.diagram-code .fullscreen-btn {
+  display: none;
+}
+
 // ===== Markdown 语法示例表：示例标题不参与文档大纲 =====
 .md-heading-demo {
   font-weight: 600;
