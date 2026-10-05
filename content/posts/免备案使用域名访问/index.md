@@ -4,8 +4,6 @@ subtitle: ''
 date: '2026-10-04T18:26:05+08:00'
 lastmod: '2026-10-04T18:26:05+08:00'
 url: "/002"
-# 旧地址曾以 /posts/no-icp-domain-access/ 发布过，保留重定向避免外链与已收录页面 404
-aliases: ["/posts/no-icp-domain-access/"]
 draft: false
 description: '国内没有备案的域名无法直接访问国内的服务器，本文介绍免备案使用域名访问的方法。'
 keywords: 'Cloudflare Tunnels, 免备案, 域名访问, 内网穿透'
