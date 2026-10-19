@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="16" cy="16" r="1.2" fill="#d1d5db"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="#f9fafb"/>
+  <!-- Dot texture -->
+  <rect width="1600" height="900" fill="url(#dots)"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1600" height="5" fill="#3b82f6"/>
+
+  <!-- Center card -->
+  <rect x="480" y="310" width="640" height="280" rx="12" fill="#ffffff"
+        filter="url(#shadow)"/>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#00000018"/>
+    </filter>
+  </defs>
+
+  <!-- Domain text -->
+  <text x="800" y="435"
+    font-family="'SF Mono','Fira Code','Consolas',monospace"
+    font-size="88"
+    font-weight="700"
+    fill="#111827"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    letter-spacing="-2">www.san3.cn</text>
+
+  <!-- Bottom label -->
+  <text x="800" y="535"
+    font-family="'Helvetica Neue',Arial,sans-serif"
+    font-size="20"
+    fill="#9ca3af"
+    text-anchor="middle"
+    letter-spacing="3">BLOG</text>
+</svg>
